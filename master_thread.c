@@ -6,18 +6,25 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:10:05 by didimitr          #+#    #+#             */
-/*   Updated: 2025/04/14 19:15:44 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:37:58 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*test_function(void *arg)
+void	*philo_routine(void *arg)
 {
 	t_philo *philo;
 	
 	philo = (t_philo *)arg;
-	printf("%d\n", philo->id);
+	while(1)
+	{
+		think(philo->id);
+		take_fork(*philo);
+		eat(*philo);
+		release_fork(*philo);
+
+	}
 	return(NULL);
 }
 
@@ -28,7 +35,13 @@ void	master_thread(t_philo *philo)
 	i = 0;
 	while(i < philo->data->number_of_philosophers)
 	{
-		pthread_create(&philo[i].thread, NULL, test_function, &philo[i]);
+		pthread_create(&philo[i].thread, NULL, philo_routine, &philo[i]);
+		i++;
+	}
+	i = 0;
+	while(i < philo->data->number_of_philosophers)
+	{
+		pthread_join(philo[i].thread, NULL);
 		i++;
 	}
 }

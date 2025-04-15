@@ -6,7 +6,7 @@
 #    By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/03 18:54:00 by didimitr          #+#    #+#              #
-#    Updated: 2025/04/14 18:10:24 by didimitr         ###   ########.fr        #
+#    Updated: 2025/04/15 14:05:55 by didimitr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 
-SRC = philo.c philo_utils.c mutex_utils.c utils.c master_thread.c
+SRC = philo.c philo_utils.c mutex_utils.c utils.c master_thread.c philo_cycle.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

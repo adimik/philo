@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 18:32:55 by didimitr          #+#    #+#             */
-/*   Updated: 2025/04/14 18:44:01 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:38:21 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ void    data_init(char **argv, t_data *data);
 t_philo *philo_create(int philo_amount, pthread_mutex_t *mutex, t_data *data);
 void	philo_destroy(t_philo *arr);
 void	master_thread(t_philo *philo);
-void	*test_function(void *arg);
+void	*philo_routine(void *arg);
+void	think(int id);
+void	take_fork(t_philo philo);
+void	eat(t_philo philo);
+void	release_fork(t_philo philo);
 
 #endif
