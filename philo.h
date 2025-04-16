@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 18:32:55 by didimitr          #+#    #+#             */
-/*   Updated: 2025/04/15 15:38:21 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:29:45 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 typedef struct s_data
 {
@@ -46,9 +47,10 @@ t_philo *philo_create(int philo_amount, pthread_mutex_t *mutex, t_data *data);
 void	philo_destroy(t_philo *arr);
 void	master_thread(t_philo *philo);
 void	*philo_routine(void *arg);
-void	think(int id);
+void	think(t_philo philo);
 void	take_fork(t_philo philo);
 void	eat(t_philo philo);
 void	release_fork(t_philo philo);
+void	philo_sleep(t_philo philo);
 
 #endif
