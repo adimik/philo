@@ -6,22 +6,22 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:52:12 by didimitr          #+#    #+#             */
-/*   Updated: 2025/04/30 16:06:28 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:57:55 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_philo *philo_create(int philo_amount, pthread_mutex_t *mutex, t_data *data)
+t_philo	*philo_create(int philo_amount, pthread_mutex_t *mutex, t_data *data)
 {
-	int i;
-	t_philo *arr;
-	
+	int		i;
+	t_philo	*arr;
+
 	i = 0;
 	arr = malloc(sizeof(t_philo) * philo_amount);
-	if(!arr)
-		return(NULL);
-	while(i < philo_amount)
+	if (!arr)
+		return (NULL);
+	while (i < philo_amount)
 	{
 		arr[i].id = i;
 		arr[i].left_fork = &mutex[i];
@@ -32,12 +32,12 @@ t_philo *philo_create(int philo_amount, pthread_mutex_t *mutex, t_data *data)
 		pthread_mutex_init(&arr[i].meal_mutex, NULL);
 		i++;
 	}
-	return(arr);	
+	return (arr);
 }
 void	philo_destroy(t_philo *arr, int amount)
 {
 	int i = 0;
-	
+
 	while (i < amount)
 	{
 		pthread_mutex_destroy(&arr[i].meal_mutex);

@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 10:06:44 by didimitr          #+#    #+#             */
-/*   Updated: 2025/04/21 15:31:18 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:36:56 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,23 @@ long long   time_now(t_philo philo)
     return(time);
 }
 
-void    smart_usleep(t_philo *philo, long long duration)
+int    smart_usleep(t_philo *philo, long long duration)
 {
     long long start;
-    
+    long long now;
+    int i;
+	
+	i = is_running(philo);
+	if(i == 0)
+		return(0);
     start = time_in_ms();
-    while(philo->alive && time_in_ms() - start < duration)
+    now = time_in_ms();
+    while(now - start < duration)
     {
-        usleep(500);
+        if(!is_running(philo))
+            return(0);
+        usleep(20);
+        now = time_in_ms();
     }
+    return(1);
 }
