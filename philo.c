@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:24:52 by didimitr          #+#    #+#             */
-/*   Updated: 2025/04/15 13:27:23 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:54:46 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     philo = philo_create(data.number_of_philosophers, forks, &data);
     master_thread(philo);
     //usleep(1000000);
-    philo_destroy(philo);
+    philo_destroy(philo, data.number_of_philosophers);
     mutex_destroy(forks, data.number_of_philosophers);
     return(0);
 }
