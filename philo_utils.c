@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:52:12 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/01 14:57:55 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:57:39 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_philo	*philo_create(int philo_amount, pthread_mutex_t *mutex, t_data *data)
 		arr[i].data = data;
 		arr[i].alive = 1;
 		arr[i].time_of_last_meal = data->start_time;
+		arr[i].num_of_eat = 0;
 		pthread_mutex_init(&arr[i].meal_mutex, NULL);
 		i++;
 	}

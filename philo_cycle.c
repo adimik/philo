@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:04:35 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/01 19:07:59 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:12:39 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	eat(t_philo *philo)
 	time = now - philo->data->start_time;
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->time_of_last_meal = now;
+	philo->num_of_eat++;
 	pthread_mutex_unlock(&philo->meal_mutex);
 	pthread_mutex_lock(&philo->data->printf_mutex);
 	printf("%lld %d is eating\n", time, philo->id);

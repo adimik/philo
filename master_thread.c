@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:10:05 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/01 19:46:16 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:20:59 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,33 +53,31 @@ void	*watchdog(void *arg)
 {
 	t_philo		*philo;
 	int			i;
-	long long	last_meal;
-	long long	now;
+	int			alive;
+	int			all_ate;
 
+	alive = 1;
 	i = 0;
+	all_ate = 0;
 	philo = (t_philo *)arg;
 	while (1)
 	{
 		while (i < philo->data->number_of_philosophers)
 		{
-			pthread_mutex_lock(&philo[i].meal_mutex);
-			last_meal = philo[i].time_of_last_meal;
-			pthread_mutex_unlock(&philo[i].meal_mutex);
-			now = time_in_ms();
-			if ((now - last_meal) > philo->data->time_to_die / 1000)
-			{
-				pthread_mutex_lock(&philo->data->running_mutex);
-				philo->data->running = 0;
-				pthread_mutex_unlock(&philo->data->running_mutex);
-				pthread_mutex_lock(&philo->data->printf_mutex);
-				printf("%lld %d died\n", now - philo->data->start_time,
-					philo[i].id);
-				pthread_mutex_unlock(&philo->data->printf_mutex);
-				return (NULL);
-			}
+			alive = philo_checker(philo, i);
+			if(alive == 0)
+				return NULL;
+			if(alive == 2)
+				all_ate++;
 			i++;
-			usleep(500);
 		}
+		if(all_ate == philo->data->number_of_philosophers)
+		{
+			end_simulation(philo);
+			return NULL;
+		}
+		usleep(500);
+		all_ate = 0;
 		i = 0;
 	}
 }
