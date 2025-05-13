@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:24:52 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/01 15:18:55 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:24:51 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
 
-	if (argc != 5)
+	if (argc != 5 && argc != 6)
 		return (write(2, "ERROR", 5));
 	forks = NULL;
 	data_init(argv, &data);

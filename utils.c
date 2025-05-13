@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:19:14 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/01 14:43:21 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:25:23 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void    data_init(char **argv, t_data *data)
     data->time_to_sleep = ft_atoi(argv[4]) * 1000;
     data->start_time = time_in_ms();
     data->running = 1;
+    data->num_of_rep = ft_atoi(argv[5]);
     pthread_mutex_init(&data->printf_mutex, NULL);
     pthread_mutex_init(&data->running_mutex, NULL);
 }

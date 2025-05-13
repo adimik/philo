@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 18:32:55 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/01 18:27:27 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:22:56 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_data
     int time_to_die;
     int time_to_eat;
     int time_to_sleep;
+    int num_of_rep;
     long long   start_time;
     pthread_mutex_t printf_mutex;
     int running;
