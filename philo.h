@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 18:32:55 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/13 17:05:30 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:14:29 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ pthread_mutex_t *mutex_malloc(int amount);
 void    mutex_destroy(pthread_mutex_t *arr, int amount);
 //UTILS.C
 int     ft_atoi(char *arr);
-void    data_init(char **argv, t_data *data, int argc);
+int    data_init(char **argv, t_data *data, int argc);
 
 t_philo *philo_create(int philo_amount, pthread_mutex_t *mutex, t_data *data);
 void	philo_destroy(t_philo *arr, int amount);
@@ -70,5 +70,6 @@ int	is_running(t_philo *philo);
 void     philo_dead(long long now, int id, t_philo *philo);
 int     philo_checker(t_philo *philo, int id);
 void    end_simulation(t_philo *philo);
+int valid_positive_input(t_data *data, int argc);
 
 #endif

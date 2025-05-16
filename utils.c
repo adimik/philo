@@ -6,13 +6,13 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:19:14 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/13 19:19:38 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:27:52 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    data_init(char **argv, t_data *data, int argc)
+int    data_init(char **argv, t_data *data, int argc)
 {
     data->number_of_philosophers = ft_atoi(argv[1]);
     data->time_to_die = ft_atoi(argv[2]) * 1000;
@@ -29,7 +29,25 @@ void    data_init(char **argv, t_data *data, int argc)
         data->num_of_rep = -1;
     pthread_mutex_init(&data->printf_mutex, NULL);
     pthread_mutex_init(&data->running_mutex, NULL);
+    if(!valid_positive_input(data, argc))
+        return(0);
+    return(1);
 }
+int valid_positive_input(t_data *data, int argc)
+{
+    if(data->number_of_philosophers < 1)
+        return(0);
+    if(data->time_to_die < 1)
+        return(0);
+    if(data->time_to_eat < 1)
+        return(0);
+    if(data->time_to_sleep < 1)
+        return(0);
+    if(data->num_of_rep < 1 && argc == 6)
+        return(0);
+    return(1);
+}
+
 int     ft_atoi(char *arr)
 {
     int i;
