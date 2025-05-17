@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:10:05 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/13 19:20:59 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:20:16 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,25 @@ void	*philo_routine(void *arg)
 	running = is_running(philo);
 	while (running)
 	{
-		if (!think(philo))
-			break ;
-		if(!philo->id % 2 == 0)
-		usleep(1);
+		if (philo->id % 2 != 0)
+			usleep(10);
 		if (!take_fork(philo))
 			break ;
 		if (!eat(philo))
-		{	
+		{
 			release_fork(philo);
 			break ;
 		}
 		release_fork(philo);
-		if(!philo_sleep(philo))
+		if (!philo_sleep(philo))
+			break ;
+		if (!think(philo))
 			break ;
 		running = is_running(philo);
 	}
 	return (NULL);
 }
+
 int	is_running(t_philo *philo)
 {
 	int	i;
@@ -51,34 +52,30 @@ int	is_running(t_philo *philo)
 
 void	*watchdog(void *arg)
 {
-	t_philo		*philo;
-	int			i;
-	int			alive;
-	int			all_ate;
+	t_philo	*philo;
+	int		i;
+	int		all_ate;
+	int		alive;
 
-	alive = 1;
-	i = 0;
-	all_ate = 0;
 	philo = (t_philo *)arg;
 	while (1)
 	{
+		all_ate = 0;
+		i = 0;
 		while (i < philo->data->number_of_philosophers)
 		{
 			alive = philo_checker(philo, i);
-			if(alive == 0)
-				return NULL;
-			if(alive == 2)
-				all_ate++;
+			if (alive == 0)
+				return (NULL);
+			all_ate += (alive == 2);
 			i++;
 		}
-		if(all_ate == philo->data->number_of_philosophers)
+		if (all_ate == philo->data->number_of_philosophers)
 		{
 			end_simulation(philo);
-			return NULL;
+			return (NULL);
 		}
 		usleep(500);
-		all_ate = 0;
-		i = 0;
 	}
 }
 

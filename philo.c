@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:24:52 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/16 13:21:17 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:00:19 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 		return (printf("0 %d died", ft_atoi(argv[2])));
 	forks = NULL;
 	if (!data_init(argv, &data, argc))
-		return(write(2, "ERROR: input cant be negative\n", 31));
+		return (write(2, "ERROR: input cant be negative\n", 31));
 	forks = mutex_malloc(data.number_of_philosophers);
 	philo = philo_create(data.number_of_philosophers, forks, &data);
 	master_thread(philo);

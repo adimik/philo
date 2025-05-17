@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:52:12 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/16 13:27:27 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:03:10 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,23 @@ t_philo	*philo_create(int philo_amount, pthread_mutex_t *mutex, t_data *data)
 	}
 	return (arr);
 }
+
 void	philo_destroy(t_philo *arr, int amount)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (i < amount)
 	{
 		pthread_mutex_destroy(&arr[i].meal_mutex);
 		i++;
 	}
 	free(arr);
+}
+
+void	end_simulation(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->running_mutex);
+	philo->data->running = 0;
+	pthread_mutex_unlock(&philo->data->running_mutex);
 }

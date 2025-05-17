@@ -6,37 +6,38 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 18:32:29 by didimitr          #+#    #+#             */
-/*   Updated: 2025/04/21 14:53:42 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:02:18 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-pthread_mutex_t *mutex_malloc(int amount)
+pthread_mutex_t	*mutex_malloc(int amount)
 {
-    pthread_mutex_t *arr;
-    int i;
+	pthread_mutex_t	*arr;
+	int				i;
 
-    i = 0;
-    arr = malloc(amount * sizeof(pthread_mutex_t));
-    if (!arr)
-        return(NULL);
-    while(i < amount)
-    {
-        pthread_mutex_init(&arr[i], NULL);
-        i++;
-    }
-    return(arr);
+	i = 0;
+	arr = malloc(amount * sizeof(pthread_mutex_t));
+	if (!arr)
+		return (NULL);
+	while (i < amount)
+	{
+		pthread_mutex_init(&arr[i], NULL);
+		i++;
+	}
+	return (arr);
 }
-void    mutex_destroy(pthread_mutex_t *arr, int amount)
-{
-    int i;
 
-    i = 0;
-    while(i < amount)
-    {
-        pthread_mutex_destroy(&arr[i]);
-        i++;
-    }
-    free(arr);
+void	mutex_destroy(pthread_mutex_t *arr, int amount)
+{
+	int		i;
+
+	i = 0;
+	while (i < amount)
+	{
+		pthread_mutex_destroy(&arr[i]);
+		i++;
+	}
+	free(arr);
 }
