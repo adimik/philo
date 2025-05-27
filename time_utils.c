@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 10:06:44 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/17 15:01:30 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:07:53 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	smart_usleep(t_philo *philo, long long duration)
 	{
 		if (!is_running(philo))
 			return (0);
-		usleep(20);
+		usleep(2);
 		now = time_in_ms();
 	}
 	return (1);

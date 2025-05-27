@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:10:05 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/17 17:20:16 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:37:01 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,20 @@ void	*philo_routine(void *arg)
 	while (running)
 	{
 		if (philo->id % 2 != 0)
-			usleep(10);
-		if (!take_fork(philo))
+		{
+			usleep(1000);
+		}
+		if (is_running(philo) && !take_fork(philo))
 			break ;
-		if (!eat(philo))
+		if (is_running(philo) && !eat(philo))
 		{
 			release_fork(philo);
 			break ;
 		}
 		release_fork(philo);
-		if (!philo_sleep(philo))
+		if (is_running(philo) && !philo_sleep(philo))
 			break ;
-		if (!think(philo))
+		if (is_running(philo) && !think(philo))
 			break ;
 		running = is_running(philo);
 	}
