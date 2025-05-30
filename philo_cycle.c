@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:04:35 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/27 21:04:38 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:42:16 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	think(t_philo *philo)
 {
 	long long	time;
 
-	if(!is_running(philo))
-		return(0);
+	if (!is_running(philo))
+		return (0);
 	time = time_in_ms();
 	pthread_mutex_lock(&philo->data->printf_mutex);
 	time = time - philo->data->start_time;
-	if(is_running(philo))
+	if (is_running(philo))
 		printf("%lld %d is thinking\n", time, philo->id);
 	pthread_mutex_unlock(&philo->data->printf_mutex);
 	return (1);
@@ -29,31 +29,15 @@ int	think(t_philo *philo)
 
 int	take_fork(t_philo *philo)
 {
-	long long	time;
-	int			i;
+	int	i;
 
 	i = is_running(philo);
-	time = time_in_ms();
 	if (i == 0)
 		return (0);
-	pthread_mutex_lock(philo->left_fork);
-	if (!is_running(philo))
-	{
-		pthread_mutex_unlock(philo->left_fork);
-		return (0);
-	}
-	pthread_mutex_lock(philo->right_fork);
-	if (!is_running(philo))
-	{
-		release_fork(philo);
-		return (0);
-	}
-	pthread_mutex_lock(&philo->data->printf_mutex);
-	time = time - philo->data->start_time;
-	if(is_running(philo))
-		printf("%lld %d has taken a fork\n", time, philo->id);
-	pthread_mutex_unlock(&philo->data->printf_mutex);
-	return (1);
+	if (philo->id % 2 == 0)
+		return (lock_from_left(philo));
+	else
+		return (lock_from_right(philo));
 }
 
 int	eat(t_philo *philo)
@@ -72,17 +56,11 @@ int	eat(t_philo *philo)
 	philo->num_of_eat++;
 	pthread_mutex_unlock(&philo->meal_mutex);
 	pthread_mutex_lock(&philo->data->printf_mutex);
-	if(is_running(philo))
+	if (is_running(philo))
 		printf("%lld %d is eating\n", time, philo->id);
 	pthread_mutex_unlock(&philo->data->printf_mutex);
 	smart_usleep(philo, philo->data->time_to_eat / 1000);
 	return (1);
-}
-
-void	release_fork(t_philo *philo)
-{
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
 }
 
 int	philo_sleep(t_philo *philo)
@@ -96,7 +74,7 @@ int	philo_sleep(t_philo *philo)
 	time = time_in_ms();
 	time = time - philo->data->start_time;
 	pthread_mutex_lock(&philo->data->printf_mutex);
-	if(is_running(philo))
+	if (is_running(philo))
 		printf("%lld %d is sleeping\n", time, philo->id);
 	pthread_mutex_unlock(&philo->data->printf_mutex);
 	smart_usleep(philo, philo->data->time_to_sleep / 1000);

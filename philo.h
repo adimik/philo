@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 18:32:55 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/17 17:21:17 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:42:58 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void				philo_destroy(t_philo *arr, int amount);
 void				master_thread(t_philo *philo);
 void				*philo_routine(void *arg);
 int					think(t_philo *philo);
-int					take_fork(t_philo *philo);
 int					eat(t_philo *philo);
 void				release_fork(t_philo *philo);
 int					philo_sleep(t_philo *philo);
@@ -69,5 +68,8 @@ void				philo_dead(long long now, int id, t_philo *philo);
 int					philo_checker(t_philo *philo, int id);
 void				end_simulation(t_philo *philo);
 int					valid_positive_input(t_data *data, int argc);
+int					take_fork(t_philo *philo);
+int					lock_from_right(t_philo *philo);
+int					lock_from_left(t_philo *philo);
 
 #endif

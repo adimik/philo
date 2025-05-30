@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:24:52 by didimitr          #+#    #+#             */
-/*   Updated: 2025/05/17 15:00:19 by didimitr         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:35:47 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	t_philo			*philo;
 
 	if (argc != 5 && argc != 6)
-		return (write(2, "ERROR", 5));
+		return (write(2, "ERROR\n", 6));
 	if (argv[1][0] == '1' && argv[1][1] == '\0')
 		return (printf("0 %d died", ft_atoi(argv[2])));
 	forks = NULL;
